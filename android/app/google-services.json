@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "505143656637",
+    "project_id": "messenger-app-f6732",
+    "storage_bucket": "messenger-app-f6732.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505143656637:android:a0b4cf1c01710b2f9037d4",
+        "android_client_info": {
+          "package_name": "ch.bbbaden.la_ila_m335_m183_9910_apps_javaweb.messangerapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505143656637-jhjfgq767gtvhbjf6tqehn5ut4tjl70u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaDfuC_ghvcD5TceR5jJg6SRUKjgtEY_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505143656637-jhjfgq767gtvhbjf6tqehn5ut4tjl70u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
