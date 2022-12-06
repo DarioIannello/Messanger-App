@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "505143656637",
-    "project_id": "messenger-app-f6732",
-    "storage_bucket": "messenger-app-f6732.appspot.com"
+    "project_number": "134776501899",
+    "project_id": "messenger-app-48fe4",
+    "storage_bucket": "messenger-app-48fe4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:505143656637:android:a0b4cf1c01710b2f9037d4",
+        "mobilesdk_app_id": "1:134776501899:android:98f6d3a4faf4ff3f6bc68e",
         "android_client_info": {
           "package_name": "ch.bbbaden.la_ila_m335_m183_9910_apps_javaweb.messangerapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "505143656637-jhjfgq767gtvhbjf6tqehn5ut4tjl70u.apps.googleusercontent.com",
+          "client_id": "134776501899-iqv3mrc9h2fv1efotthjk725ishcnj0h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCaDfuC_ghvcD5TceR5jJg6SRUKjgtEY_I"
+          "current_key": "AIzaSyDxix08oneRdYFl2JpBJ8H6EYDsFNWqxmM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "505143656637-jhjfgq767gtvhbjf6tqehn5ut4tjl70u.apps.googleusercontent.com",
+              "client_id": "134776501899-iqv3mrc9h2fv1efotthjk725ishcnj0h.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
