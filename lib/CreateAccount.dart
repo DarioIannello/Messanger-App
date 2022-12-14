@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:messangerapp/CreateAccount.dart';
-import 'package:messangerapp/HomeScreen.dart';
 import 'package:messangerapp/Methods.dart';
+import 'package:messangerapp/HomeScreen.dart';
 
-class LoginScreen extends StatefulWidget {
+class CreateAccount extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _CreateAccountState createState() => _CreateAccountState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _CreateAccountState extends State<CreateAccount> {
+  final TextEditingController _name = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final TextEditingController _password = TextEditingController();
+  final TextEditingController _confirmPassword = TextEditingController();
   bool isLoading = false;
 
   @override
@@ -52,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     width: size.width / 1.1,
                     child: const Text(
-                      "Bitte anmelden!",
+                      "Jetzt Registrieren!",
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 25,
@@ -62,6 +63,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(
                     height: size.height / 10,
+                  ),
+                  Container(
+                    width: size.width,
+                    alignment: Alignment.center,
+                    child: field(size, "Name", Icons.abc, _name),
+                  ),
+                  SizedBox(
+                    height: size.height / 50,
                   ),
                   Container(
                     width: size.width,
@@ -77,6 +86,15 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: field(size, "Passwort", Icons.lock, _password),
                   ),
                   SizedBox(
+                    height: size.height / 50,
+                  ),
+                  Container(
+                    width: size.width,
+                    alignment: Alignment.center,
+                    child: field(size, "Passwort bestätigen", Icons.lock,
+                        _confirmPassword),
+                  ),
+                  SizedBox(
                     height: size.height / 20,
                   ),
                   customButton(size),
@@ -84,10 +102,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: size.height / 20,
                   ),
                   GestureDetector(
-                    onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(builder: (_) => CreateAccount())),
+                    onTap: () => Navigator.pop(context),
                     child: const Text(
-                      "Noch keinen Account?",
+                      "Zurück zum Login",
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 18,
@@ -104,12 +121,17 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget customButton(Size size) {
     return GestureDetector(
       onTap: () {
-        if (_email.text.isNotEmpty && _password.text.isNotEmpty) {
+        if (_name.text.isNotEmpty &&
+            _email.text.isNotEmpty &&
+            _password.text.isNotEmpty &&
+            _confirmPassword.text.isNotEmpty) {
           setState(() {
             isLoading = true;
           });
 
-          login(_email.text, _password.text).then((user) {
+          createAccount(_name.text, _email.text, _password.text,
+                  _confirmPassword.text)
+              .then((user) {
             if (user != null) {
               Navigator.push(context, MaterialPageRoute(builder: (_) => HomeScreen()));
             }
@@ -130,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         alignment: Alignment.center,
         child: const Text(
-          "Login",
+          "Registrieren",
           style: TextStyle(
             color: Colors.white,
             fontSize: 22,
