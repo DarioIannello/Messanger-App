@@ -1,31 +1,39 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:messangerapp/LoginScreen.dart';
 
 Future<User?> createAccount(
     String name, String email, String password, String confirmPassword) async {
+  FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-    FirebaseAuth _auth = FirebaseAuth.instance;
-
-    try {
-      User? user = (await _auth.createUserWithEmailAndPassword(
-              email: email, password: password))
-          .user;
-      if (password != confirmPassword) {
-        print("Account konnte nicht erstellt werden!");
-        return user;
-      }
-      if (user != null) {
-        print("Account wurde erstellt!");
-        return user;
-      } else {
-        print("Account konnte nicht erstellt werden!");
-        return user;
-      }
-    } catch (e) {
-      print(e);
-      return null;
+  try {
+    User? user = (await _auth.createUserWithEmailAndPassword(
+            email: email, password: password))
+        .user;
+    if (password != confirmPassword) {
+      print("Account konnte nicht erstellt werden!");
+      return user;
     }
+    if (user != null) {
+      print("Account wurde erstellt!");
+
+      await _firestore.collection("users").doc(_auth.currentUser?.uid).set({
+        "name": name,
+        "email": email,
+        "status": "Nicht Erreichbar",
+      });
+
+      return user;
+    } else {
+      print("Account konnte nicht erstellt werden!");
+      return user;
+    }
+  } catch (e) {
+    print(e);
+    return null;
+  }
 }
 
 Future<User?> login(String email, String password) async {
@@ -55,7 +63,7 @@ Future logout(BuildContext context) async {
     await _auth.signOut().then((user) {
       Navigator.push(context, MaterialPageRoute(builder: (_) => LoginScreen()));
     });
-  } catch(e) {
+  } catch (e) {
     print("Ausloggen nicht möglich!");
   }
 }
