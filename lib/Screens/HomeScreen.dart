@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'Methods.dart';
+import '../Authentication/Methods.dart';
+import 'ChatRoom.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,6 +14,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Map<String, dynamic>? userMap;
   bool isLoading = false;
   final TextEditingController _search = TextEditingController();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  String chatRoomId(String user1, String user2) {
+    if (user1[0].toLowerCase().codeUnits[0] >
+        user2[0].toLowerCase().codeUnits[0]) {
+      return "$user1$user2";
+    } else {
+      return "$user2$user1";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
           .where("name", isEqualTo: _search.text)
           .get()
           .then((value) {
-
         setState(() {
           userMap = value.docs[0].data();
           isLoading = false;
@@ -42,7 +53,8 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text("Chat-App"),
         actions: [
-          IconButton(onPressed: () => logout(context), icon: const Icon(Icons.logout))
+          IconButton(
+              onPressed: () => logout(context), icon: const Icon(Icons.logout))
         ],
       ),
       body: isLoading
@@ -84,23 +96,35 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: size.height / 50,
                 ),
+                userMap != null
+                    ? ListTile(
+                        onTap: () {
+                          String roomId = chatRoomId(
+                              _auth.currentUser!.displayName!,
+                              userMap!["name"]);
 
-                if (userMap != null)
-                  ListTile(
-                    onTap: () {},
-                    leading: const Icon(Icons.account_box, color: Colors.black),
-                    title: Text(
-                      userMap!["name"],
-                      style: const TextStyle(
-                          color: Colors.black,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    subtitle: Text(userMap!["email"]),
-                    trailing: const Icon(Icons.chat, color: Colors.black),
-                  )
-                else
-                  Container(),
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (_) => ChatRoom(
+                                chatRoomId: roomId,
+                                userMap: userMap,
+                              ),
+                            ),
+                          );
+                        },
+                        leading: Icon(Icons.account_box, color: Colors.black),
+                        title: Text(
+                          userMap!['name'],
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        subtitle: Text(userMap!['email']),
+                        trailing: Icon(Icons.chat, color: Colors.black),
+                      )
+                    : Container(),
               ],
             ),
     );

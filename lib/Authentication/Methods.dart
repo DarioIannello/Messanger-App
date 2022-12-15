@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:messangerapp/LoginScreen.dart';
+import 'package:messangerapp/Screens/LoginScreen.dart';
 
 Future<User?> createAccount(
     String name, String email, String password, String confirmPassword) async {
@@ -18,6 +18,8 @@ Future<User?> createAccount(
     }
     if (user != null) {
       print("Account wurde erstellt!");
+
+      user.updateDisplayName(name);
 
       await _firestore.collection("users").doc(_auth.currentUser?.uid).set({
         "name": name,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:messangerapp/CreateAccount.dart';
-import 'package:messangerapp/HomeScreen.dart';
-import 'package:messangerapp/Methods.dart';
+import '../Authentication/Methods.dart';
+import 'CreateAccount.dart';
+import 'HomeScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
