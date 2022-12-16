@@ -24,7 +24,6 @@ Future<User?> createAccount(
       await _firestore.collection("users").doc(_auth.currentUser?.uid).set({
         "name": name,
         "email": email,
-        "status": "Nicht Erreichbar",
       });
 
       return user;
