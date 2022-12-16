@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../Authentication/Methods.dart';
 import 'CreateAccount.dart';
 import 'HomeScreen.dart';
@@ -64,17 +65,31 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: size.height / 10,
                   ),
                   Container(
-                    width: size.width,
+                    margin: EdgeInsets.only(left: 50, right: 50, bottom: 0),
+                    width: size.width / 1.1,
                     alignment: Alignment.center,
-                    child: field(size, "E-Mail", Icons.account_box, _email),
+                    child: TextField(
+                      controller: _email,
+                      decoration: const InputDecoration(
+                        hintText: "E-Mail",
+                        icon: Icon(Icons.account_box),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: size.height / 50,
                   ),
                   Container(
-                    width: size.width,
+                    width: size.width / 1.1,
                     alignment: Alignment.center,
-                    child: field(size, "Passwort", Icons.lock, _password),
+                    child: TextField(
+                      controller: _password,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        hintText: "Passwort",
+                        icon: Icon(Icons.lock),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: size.height / 20,
@@ -111,7 +126,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
           login(context, _email.text, _password.text).then((user) {
             if (user != null) {
-              Navigator.push(context, MaterialPageRoute(builder: (_) => HomeScreen()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => HomeScreen()));
             }
             setState(() {
               isLoading = false;

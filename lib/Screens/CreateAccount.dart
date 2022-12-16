@@ -65,34 +65,60 @@ class _CreateAccountState extends State<CreateAccount> {
                     height: size.height / 10,
                   ),
                   Container(
-                    width: size.width,
+                    margin: EdgeInsets.only(left: 50, right: 50, bottom: 0),
+                    width: size.width / 1.1,
                     alignment: Alignment.center,
-                    child: field(size, "Name", Icons.abc, _name),
+                    child: TextField(
+                      controller: _name,
+                      decoration: const InputDecoration(
+                        hintText: "Name",
+                        icon: Icon(Icons.abc),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: size.height / 50,
                   ),
                   Container(
-                    width: size.width,
+                    width: size.width / 1.1,
                     alignment: Alignment.center,
-                    child: field(size, "E-Mail", Icons.account_box, _email),
+                    child: TextField(
+                      controller: _email,
+                      decoration: const InputDecoration(
+                        hintText: "E-Mail",
+                        icon: Icon(Icons.account_box),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: size.height / 50,
                   ),
                   Container(
-                    width: size.width,
+                    width: size.width / 1.1,
                     alignment: Alignment.center,
-                    child: field(size, "Passwort", Icons.lock, _password),
+                    child: TextField(
+                      controller: _password,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        hintText: "Passwort",
+                        icon: Icon(Icons.lock),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: size.height / 50,
                   ),
                   Container(
-                    width: size.width,
+                    width: size.width / 1.1,
                     alignment: Alignment.center,
-                    child: field(size, "Passwort bestätigen", Icons.lock,
-                        _confirmPassword),
+                    child: TextField(
+                      controller: _confirmPassword,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        hintText: "Passwort Bestätigen",
+                        icon: Icon(Icons.lock),
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: size.height / 20,
