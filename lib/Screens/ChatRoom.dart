@@ -69,17 +69,17 @@ class ChatRoom extends StatelessWidget {
               ),
             ),
             Container(
-              height: size.height / 10,
-              width: size.width,
+              height: size.height /10,
+              width: size.width ,
               alignment: Alignment.center,
               child: Container(
                 height: size.height / 12,
-                width: size.width / 1.1,
+                width: size.width / 1.05,
                 child: Row(
                   children: [
                     Container(
-                      height: size.height / 12,
-                      width: size.width / 1.5,
+                      height: size.height / 15,
+                      width: size.width / 1.2,
                       child: TextField(
                         controller: _message,
                         decoration: InputDecoration(
@@ -108,7 +108,7 @@ class ChatRoom extends StatelessWidget {
           : Alignment.centerLeft,
       child: Container(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+        margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: Colors.blue

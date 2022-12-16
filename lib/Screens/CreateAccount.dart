@@ -45,7 +45,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   Container(
                     width: size.width / 1.1,
                     child: const Text(
-                      "Willkommen",
+                      "Herzlich Willkommen!",
                       style:
                           TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                     ),
@@ -53,7 +53,7 @@ class _CreateAccountState extends State<CreateAccount> {
                   Container(
                     width: size.width / 1.1,
                     child: const Text(
-                      "Jetzt Registrieren!",
+                      "Jetzt Registrieren:",
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 25,

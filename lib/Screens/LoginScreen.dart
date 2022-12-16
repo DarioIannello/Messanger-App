@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     width: size.width / 1.1,
                     child: const Text(
-                      "Willkommen",
+                      "Willkommen in der Chat-App!",
                       style:
                           TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                     ),
@@ -53,7 +53,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   Container(
                     width: size.width / 1.1,
                     child: const Text(
-                      "Bitte anmelden!",
+                      "Jetzt anmelden:",
                       style: TextStyle(
                         color: Colors.grey,
                         fontSize: 25,
@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(builder: (_) => CreateAccount())),
                     child: const Text(
-                      "Noch keinen Account?",
+                      "Noch keinen Account? Jetzt Registrieren!",
                       style: TextStyle(
                         color: Colors.blue,
                         fontSize: 18,
