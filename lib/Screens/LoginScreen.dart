@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
             isLoading = true;
           });
 
-          login(_email.text, _password.text).then((user) {
+          login(context, _email.text, _password.text).then((user) {
             if (user != null) {
               Navigator.push(context, MaterialPageRoute(builder: (_) => HomeScreen()));
             }

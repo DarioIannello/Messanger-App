@@ -45,7 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
           userMap = value.docs[0].data();
           isLoading = false;
         });
-        print(userMap);
       });
     }
 

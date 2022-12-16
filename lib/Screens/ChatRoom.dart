@@ -27,7 +27,6 @@ class ChatRoom extends StatelessWidget {
           .collection("chats")
           .add(messages);
     } else {
-      print("Nachricht eingeben");
     }
   }
 

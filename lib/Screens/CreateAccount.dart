@@ -129,7 +129,7 @@ class _CreateAccountState extends State<CreateAccount> {
             isLoading = true;
           });
 
-          createAccount(_name.text, _email.text, _password.text,
+          createAccount(context, _name.text, _email.text, _password.text,
                   _confirmPassword.text)
               .then((user) {
             if (user != null) {
