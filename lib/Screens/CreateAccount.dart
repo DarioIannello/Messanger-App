@@ -140,7 +140,7 @@ class _CreateAccountState extends State<CreateAccount> {
             });
           });
         } else {
-          print("Bitte jedes Feld ausfüllen!");
+          _showFailedRegistrationDialog();
         }
       },
       child: Container(
@@ -177,6 +177,33 @@ class _CreateAccountState extends State<CreateAccount> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         ),
       ),
+    );
+  }
+
+  Future<void> _showFailedRegistrationDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Registrierung fehlgeschlagen!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Bitte füllen Sie alle Felder korrekt aus.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -118,7 +118,7 @@ class _LoginScreenState extends State<LoginScreen> {
             });
           });
         } else {
-          print("Bitte jedes Feld ausfüllen!");
+          _showFailedLoginDialog();
         }
       },
       child: Container(
@@ -155,6 +155,33 @@ class _LoginScreenState extends State<LoginScreen> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         ),
       ),
+    );
+  }
+
+  Future<void> _showFailedLoginDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Anmeldung fehlgeschlagen!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Bitte füllen Sie alle Felder korrekt aus.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
