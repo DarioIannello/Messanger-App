@@ -14,7 +14,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Map<String, dynamic>? userMap;
   bool isLoading = false;
   final TextEditingController _search = TextEditingController();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   String chatRoomId(String user1, String user2) {
     if (user1[0].toLowerCase().codeUnits[0] >
@@ -28,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    FirebaseAuth _auth = FirebaseAuth.instance;
 
     void onSearch() async {
       FirebaseFirestore _firestrore = FirebaseFirestore.instance;
