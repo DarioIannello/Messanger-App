@@ -36,23 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
         isLoading = true;
       });
 
-      try {
-        await _firestrore
-            .collection("users")
-            .where("name", isEqualTo: _search.text)
-            .get()
-            .then((value) {
-          setState(() {
-            userMap = value.docs[0].data();
-            isLoading = false;
-          });
-        });
-      } catch (e) {
-        _showUserNotFoundDialog();
+      await _firestrore
+          .collection("users")
+          .where("name", isEqualTo: _search.text)
+          .get()
+          .then((value) {
         setState(() {
+          userMap = value.docs[0].data();
           isLoading = false;
         });
-      }
+      });
     }
 
     return Scaffold(
@@ -102,8 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: size.height / 50,
                 ),
-                userMap != null
-                    ? ListTile(
+                if (userMap != null) ListTile(
                         onTap: () {
                           String roomId = chatRoomId(
                               _auth.currentUser!.displayName!,
@@ -131,8 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         subtitle: Text(userMap!['email']),
                         trailing: Icon(Icons.chat, color: Colors.black),
-                      )
-                    : Container(),
+                      ) else  Container(),
               ],
             ),
     );
