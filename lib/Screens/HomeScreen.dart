@@ -36,15 +36,21 @@ class _HomeScreenState extends State<HomeScreen> {
         isLoading = true;
       });
 
-      await _firestrore
-          .collection("users")
-          .where("name", isEqualTo: _search.text)
-          .get()
-          .then((value) {
-        setState(() {
-          userMap = value.docs[0].data();
-          isLoading = false;
+      try {
+        await _firestrore
+            .collection("users")
+            .where("name", isEqualTo: _search.text)
+            .get()
+            .then((value) {
+          setState(() {
+            userMap = value.docs[0].data();
+          });
         });
+      } catch (e) {
+        _showUserNotFoundDialog();
+      }
+      setState(() {
+        isLoading = false;
       });
     }
 
@@ -95,35 +101,38 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: size.height / 50,
                 ),
-                if (userMap != null) ListTile(
-                        onTap: () {
-                          String roomId = chatRoomId(
-                              _auth.currentUser!.displayName!,
-                              userMap!["name"],
-                              _auth.currentUser!.email!,
-                              userMap!["email"]);
+                if (userMap != null)
+                  ListTile(
+                    onTap: () {
+                      String roomId = chatRoomId(
+                          _auth.currentUser!.displayName!,
+                          userMap!["name"],
+                          _auth.currentUser!.email!,
+                          userMap!["email"]);
 
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (_) => ChatRoom(
-                                chatRoomId: roomId,
-                                userMap: userMap,
-                              ),
-                            ),
-                          );
-                        },
-                        leading: Icon(Icons.account_box, color: Colors.black),
-                        title: Text(
-                          userMap!['name'],
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => ChatRoom(
+                            chatRoomId: roomId,
+                            userMap: userMap,
                           ),
                         ),
-                        subtitle: Text(userMap!['email']),
-                        trailing: Icon(Icons.chat, color: Colors.black),
-                      ) else  Container(),
+                      );
+                    },
+                    leading: Icon(Icons.account_box, color: Colors.black),
+                    title: Text(
+                      userMap!['name'],
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    subtitle: Text(userMap!['email']),
+                    trailing: Icon(Icons.chat, color: Colors.black),
+                  )
+                else
+                  Container(),
               ],
             ),
     );
