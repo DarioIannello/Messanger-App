@@ -15,12 +15,12 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isLoading = false;
   final TextEditingController _search = TextEditingController();
 
-  String chatRoomId(String user1, String user2) {
+  String chatRoomId(String user1, String user2, String mail1, String mail2) {
     if (user1.toLowerCase().codeUnits.length >
         user2.toLowerCase().codeUnits.length) {
-      return "$user1$user2";
+      return "$mail1$mail2";
     } else {
-      return "$user2$user1";
+      return "$mail2$mail1";
     }
   }
 
@@ -95,12 +95,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: size.height / 50,
                 ),
-                userMap != null
-                    ? ListTile(
+                if (userMap != null) ListTile(
                         onTap: () {
                           String roomId = chatRoomId(
                               _auth.currentUser!.displayName!,
-                              userMap!["name"]);
+                              userMap!["name"],
+                              _auth.currentUser!.email!,
+                              userMap!["email"]);
 
                           Navigator.of(context).push(
                             MaterialPageRoute(
@@ -122,10 +123,36 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         subtitle: Text(userMap!['email']),
                         trailing: Icon(Icons.chat, color: Colors.black),
-                      )
-                    : Container(),
+                      ) else  Container(),
               ],
             ),
+    );
+  }
+
+  Future<void> _showUserNotFoundDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Benutzer nicht gefunden!'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: const <Widget>[
+                Text('Dieser Benutzer existiert nicht.'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Ok'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
