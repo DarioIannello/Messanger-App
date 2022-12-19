@@ -16,8 +16,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _search = TextEditingController();
 
   String chatRoomId(String user1, String user2) {
-    if (user1[0].toLowerCase().codeUnits[0] >
-        user2[0].toLowerCase().codeUnits[0]) {
+    if (user1.toLowerCase().codeUnits.length >
+        user2.toLowerCase().codeUnits.length) {
       return "$user1$user2";
     } else {
       return "$user2$user1";
