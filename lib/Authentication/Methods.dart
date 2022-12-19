@@ -8,14 +8,16 @@ Future<User?> createAccount(BuildContext context, String name, String email, Str
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  if (password != confirmPassword) {
+    _showFailedRegistrationDialog(context);
+    email = ""; 
+  }
+
   try {
     User? user = (await _auth.createUserWithEmailAndPassword(
         email: email, password: password))
         .user;
-    if (password != confirmPassword) {
-      _showFailedRegistrationDialog(context);
-      return user;
-    }
+
     if (user != null) {
       print("Account wurde erstellt!");
 
